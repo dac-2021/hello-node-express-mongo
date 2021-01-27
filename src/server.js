@@ -4,8 +4,8 @@ const todoUpsert = require("./todo.upsert");
 
 app.get("/", async (req, res) => {
   try {
-    // hardcoded insert
-    await todoUpsert.insertHardCoded();
+    const { task, complete } = req.query;
+    todoUpsert.addTodo({ task: task, complete: complete });
 
     res.json({ message: "Operation Success", opr: true });
   } catch (err) {
