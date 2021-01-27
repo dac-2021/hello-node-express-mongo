@@ -3,10 +3,14 @@ const app = express();
 const todoUpsert = require("./todo.upsert");
 
 app.get("/", async (req, res) => {
-  // hardcoded insert
-  await todoUpsert.insertHardCoded();
+  try {
+    // hardcoded insert
+    await todoUpsert.insertHardCoded();
 
-  res.send("hello World");
+    res.json({ message: "Operation Success", opr: true });
+  } catch (err) {
+    res.json({ message: "Server Side Error!", opr: false });
+  }
 });
 
 // T2 Server
