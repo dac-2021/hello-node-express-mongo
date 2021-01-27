@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const todoUpsert = require("./todo.upsert");
 
+// Applying MiddleWare
+// READ THE HTTP BODY.
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.get("/", async (req, res) => {
   try {
     const { task, complete } = req.query;
@@ -15,7 +20,7 @@ app.get("/", async (req, res) => {
 
 app.post("/", (req, res) => {
   try {
-    const { task, complete } = req.query;
+    const { task, complete } = req.body;
     todoUpsert.addTodo({ task: task, complete: complete });
 
     res.json({ message: "Operation Success using POST", opr: true });
