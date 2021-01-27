@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const todoUpsert = require("./todo.upsert");
 
@@ -6,6 +7,7 @@ const todoUpsert = require("./todo.upsert");
 // READ THE HTTP BODY.
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.get("/", async (req, res) => {
   try {
@@ -30,4 +32,4 @@ app.post("/", (req, res) => {
 });
 
 // T2 Server
-app.listen(3000, () => console.log("Server Started"));
+app.listen(4000, () => console.log("Server Started"));
